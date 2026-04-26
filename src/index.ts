@@ -1,14 +1,12 @@
-import LegacyAudioPlayerAdapter from "./adapters/LegacyAudioPlayerAdapter.js";
-import { LegacyAudioPlayer } from "./classes/LegacyAudioPlayer.js";
-import { MediaPlayer } from "./classes/MediaPlayers.js";
+import { ShapeFactory } from "./factory/ShapeFactory.js";
+import { EShape } from "./types/EShape.js";
 
-// we can run directly media player because it supports play function with audio type and file name
-const mediaPlayer = new MediaPlayer();
-mediaPlayer.play("mp3", "song.mp3");
-mediaPlayer.play("wav", "song.wav");
+// client code
+// client don't need to know about the specific classes, just use the factory to create shapes and call their methods
+const circle = ShapeFactory.createShape(EShape.Circle);
+console.log("Circle Area:", circle.area());
+console.log("Circle Perimeter:", circle.perimeter());
 
-// but we cannot run legacy audio player directly because it has a different interface
-// we need to use adapter to make it compatible with media player interface
-const legacyPlayer = new LegacyAudioPlayerAdapter(new LegacyAudioPlayer());
-legacyPlayer.play("mp3", "song.mp3");
-legacyPlayer.play("wav", "song.wav");
+const triangle = ShapeFactory.createShape(EShape.Triangle);
+console.log("Triangle Area:", triangle.area());
+console.log("Triangle Perimeter:", triangle.perimeter());
