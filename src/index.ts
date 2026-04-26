@@ -1,14 +1,14 @@
-import Biolder from "./classes/Boilder.js";
-import Brewer from "./classes/Brewer.js";
-import CoffeeMakerFacade from "./classes/CoffeeMakerFacade.js";
-import Grinder from "./classes/Grinder.js";
+import LegacyAudioPlayerAdapter from "./adapters/LegacyAudioPlayerAdapter.js";
+import { LegacyAudioPlayer } from "./classes/LegacyAudioPlayer.js";
+import { MediaPlayer } from "./classes/MediaPlayers.js";
 
-// client code
-const brewer = new Brewer();
-const grinder = new Grinder();
-const boilder = new Biolder();
+// we can run directly media player because it supports play function with audio type and file name
+const mediaPlayer = new MediaPlayer();
+mediaPlayer.play("mp3", "song.mp3");
+mediaPlayer.play("wav", "song.wav");
 
-const coffeeMachine = new CoffeeMakerFacade(grinder, boilder, brewer);
-
-// with the simple function we can do everything, so client don't have to worry about the complex subsystem
-coffeeMachine.makeCoffee();
+// but we cannot run legacy audio player directly because it has a different interface
+// we need to use adapter to make it compatible with media player interface
+const legacyPlayer = new LegacyAudioPlayerAdapter(new LegacyAudioPlayer());
+legacyPlayer.play("mp3", "song.mp3");
+legacyPlayer.play("wav", "song.wav");
