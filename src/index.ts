@@ -1,38 +1,10 @@
-// client code
-// get sql databases and use them without createing their objects directly
-import { NoSQLDatabaseFactory } from "./factory/factories/NoSQLDatabaseFactory.js";
-import { SQLDatabaseFactory } from "./factory/factories/SQLDatabaseFactory.js";
+import { AudioPlayer } from "./classes/AudioPlayer.js";
+import { MacOsMediaPlayer } from "./classes/MacOsMediaPlayer.js";
+import { VedioPlayer } from "./classes/VedioPlayer.js";
+import { WindowsMediaPlayer } from "./classes/WindowsMediaPlayer.js";
 
-// using NoSQL database factory to create NoSQL databases
-const noSqlDatabaseFactory = new NoSQLDatabaseFactory();
+const windowsVedioPlayer = new VedioPlayer(new WindowsMediaPlayer());
+console.log(windowsVedioPlayer);windowsVedioPlayer
 
-const mongoDB = noSqlDatabaseFactory.createDatabase("MongoDb");
-mongoDB.connect(); 
-mongoDB.disconnect();
-
-const mariaDB = noSqlDatabaseFactory.createDatabase("MariaDb");
-mariaDB.connect();
-mariaDB.disconnect();
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-// using SQL database factory to create SQL databases
-const sqlDatabaseFactory = new SQLDatabaseFactory();
-
-const mySQLDatabase = sqlDatabaseFactory.createDatabase("MySql");
-mySQLDatabase.connect();
-mySQLDatabase.disconnect();
-
-const postgreSQLDatabase = sqlDatabaseFactory.createDatabase("PostgreSql");
-postgreSQLDatabase.connect();
-postgreSQLDatabase.disconnect();
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+const macosAudioPlayer = new AudioPlayer(new MacOsMediaPlayer());
+console.log(macosAudioPlayer);
