@@ -35,7 +35,8 @@ classDiagram
     }
 
     class Client {
-        +main()
+        const windowsVedioPlayer = new VedioPlayer(new WindowsMediaPlayer());
+        const macosAudioPlayer = new AudioPlayer(new MacOsMediaPlayer());
     }
 
     IMediaPlayer <|.. WindowsMediaPlayer : is-a
